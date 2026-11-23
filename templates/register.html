@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | Voting Platform</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <main class="page-container">
+        <section class="shell">
+            <div class="brand"><span class="brand-mark" aria-hidden="true"></span><span>Voting Platform</span></div>
+            <div class="form-card">
+                <p class="eyebrow">Voter registration</p>
+                <h1>Create account</h1>
+                <p class="subtitle">Register once to participate in the election.</p>
+
+            {% if message %}
+                <div class="message">{{ message }}</div>
+            {% endif %}
+
+            <form action="/register" method="POST">
+
+                <div class="form-group">
+                    <label class="field-label" for="username">Username</label>
+                    <input id="username" type="text" name="username" placeholder="Choose a username" autocomplete="username" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="field-label" for="email">Email address</label>
+                    <input id="email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="field-label" for="password">Password</label>
+                    <input id="password" type="password" name="password" placeholder="Create a password" autocomplete="new-password" required>
+                </div>
+
+                <button type="submit" class="btn">
+                    Create account
+                </button>
+
+            </form>
+
+            <p class="footer-text">
+                Already registered? <a href="/login">Sign in</a>
+            </p>
+
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
+
