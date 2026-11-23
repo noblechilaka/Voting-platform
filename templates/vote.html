@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cast Your Vote | Voting Platform</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <main class="page-container">
+        <section class="shell">
+            <div class="brand">
+                <span class="brand-mark" aria-hidden="true"></span>
+                <span>Voting Platform</span>
+            </div>
+            <div class="form-card">
+                <p class="eyebrow">Official ballot</p>
+                <h1>Cast your vote</h1>
+                <p class="subtitle">Select one candidate, then confirm your choice.</p>
+
+                {% if message %}
+                    <div class="message">{{ message }}</div>
+                {% endif %}
+
+                <form action="/vote" method="POST">
+                    <div class="candidate-list">
+                        {% for candidate in candidates %}
+                            <label class="candidate-card">
+                                <input
+                                    type="radio"
+                                    name="candidate_id"
+                                    value="{{ candidate.id }}"
+                                    required
+                                >
+                                <span>
+                                    <span class="candidate-name">{{ candidate.name }}</span>
+                                    <span class="candidate-description">{{ candidate.description }}</span>
+                                </span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn">Submit vote</button>
+                </form>
+
+                <nav class="action-links" aria-label="Election navigation">
+                    <a href="/results">View election results</a>
+                    <a class="logout-link" href="/logout">Logout</a>
+                </nav>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

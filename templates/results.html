@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Election Results | Voting Platform</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <main class="page-container">
+        <section class="shell results-shell">
+            <div class="brand">
+                <span class="brand-mark" aria-hidden="true"></span>
+                <span>Voting Platform</span>
+            </div>
+            <div class="form-card">
+                <p class="eyebrow">Live summary</p>
+                <h1>Election results</h1>
+                <p class="subtitle">Current tally across all registered candidates.</p>
+
+                <div class="results-grid">
+                    {% for candidate in candidates %}
+                        <div class="result-card">
+                            <h3>{{ candidate.name }}</h3>
+                            <p class="candidate-description">{{ candidate.description }}</p>
+                            <div class="vote-count">
+                                {{ candidate.vote_count }}
+                                <span>votes</span>
+                            </div>
+                            <div class="vote-bar">
+                                <div
+                                    class="vote-bar-fill"
+                                    style="width: {{ (candidate.vote_count / (votes|length) * 100) if votes|length > 0 else 0 }}%;"
+                                ></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="total-votes">
+                    <span>Total votes cast</span>
+                    <h2>{{ votes|length }}</h2>
+                </div>
+
+                <div class="vote-list">
+                    {% for vote in votes %}
+                        <div class="vote-row">
+                            <span>{{ vote.user.username }}</span>
+                            <strong>{{ vote.candidate.name }}</strong>
+                        </div>
+                    {% else %}
+                        <p class="empty-state">No votes have been recorded yet.</p>
+                    {% endfor %}
+                </div>
+
+                <nav class="action-links" aria-label="Election navigation">
+                    <a href="/vote">Back to voting</a>
+                    <a class="logout-link" href="/logout">Logout</a>
+                </nav>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
